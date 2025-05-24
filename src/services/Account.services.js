@@ -1,6 +1,10 @@
 const AccountModel = require('../models/Account.models');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+require('dotenv').config();
 
+
+const JWT_SECRET = '14062004'; // => Nên lưu trong biến môi trường
 class AccountService{
     static async registerUser({TenTK,pass,email,role,trangthai})
     {
@@ -34,8 +38,19 @@ class AccountService{
 
       // Nếu muốn có token JWT, tạo ở đây rồi return
       // return { user, token };
+      // 👉 Tạo JWT token
+      const token = jwt.sign(
+        {
+          userId: user._id,
+          role: user.role
+        },
+        JWT_SECRET,
+        {
+          expiresIn: '1d' // Token sống trong 1 ngày
+        }
+      );
 
-      return user;
+    return { user, token };
     } catch (error) {
       throw error;
     }

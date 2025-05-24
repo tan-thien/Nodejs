@@ -21,11 +21,12 @@ exports.login = async (req, res, next) => {
   try {
     const { TenTK, pass } = req.body;
 
-    const user = await AccountService.loginUser({ TenTK, pass });
+    const { user, token } = await AccountService.loginUser({ TenTK, pass });
 
     res.json({
       status: true,
       message: 'Đăng nhập thành công',
+      token, // 🔑 Gửi token về
       user: {
         id: user._id,
         TenTK: user.TenTK,
