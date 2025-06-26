@@ -5,11 +5,11 @@ exports.create = async (data) => {
 };
 
 exports.getAll = async () => {
-  return await Schedule.find().populate('MaPhim').populate('MaPhong');
+  return await Schedule.find().populate('MaPhim').populate('MaRap');
 };
 
 exports.getById = async (id) => {
-  return await Schedule.findById(id).populate('MaPhim').populate('MaPhong');
+  return await Schedule.findById(id).populate('MaPhim').populate('MaRap');
 };
 
 exports.update = async (id, data) => {
