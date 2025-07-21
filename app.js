@@ -8,7 +8,13 @@ const genreRouter = require('./src/routers/Genre.router');
 const movieRouter = require('./src/routers/Movie.router');
 const scheduleRouter = require('./src/routers/Schedule.router');
 const seatRouter = require('./src/routers/seat.router');
-
+const scheduleSeatRoutes = require('./src/routers/scheduleSeat.routes');
+const ticketRoutes = require('./src/routers/ticket.routes');
+const newsRoutes = require('./src/routers/News.route');
+const servicesRoutes = require('./src/routers/Service.route');
+const paymentRouter = require('./src/routers/payment.route');
+const paypalRouter = require('./src/routers/paypal.route');
+const braintreeRoute = require('./src/routers/braintree.route');
 
 const app = express();
 
@@ -35,5 +41,12 @@ app.use('/', genreRouter);
 app.use('/', movieRouter);
 app.use('/', scheduleRouter);
 app.use('/api/seats', seatRouter);
+app.use('/', scheduleSeatRoutes);
+app.use('/', ticketRoutes);
+app.use('/',newsRoutes);
+app.use('/',servicesRoutes);
+app.use('/', paymentRouter);
+app.use('/api/paypal', paypalRouter);
+app.use('/api/braintree', braintreeRoute);
 
 module.exports = app;

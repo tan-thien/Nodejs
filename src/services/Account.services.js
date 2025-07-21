@@ -5,26 +5,25 @@ require('dotenv').config();
 
 
 const JWT_SECRET = '14062004'; // => Nên lưu trong biến môi trường
-class AccountService{
-    static async registerUser({TenTK,pass,email,role,trangthai})
-    {
-        try{
-            // Kiểm tra username hoặc email đã tồn tại
-            const existingUser = await AccountModel.findOne({
-            $or: [{ TenTK }, { email }]
-            });
-            if (existingUser) {
-            throw new Error('Tên tài khoản hoặc email đã được sử dụng');
-            }
+class AccountService {
+  static async registerUser({ TenTK, pass, email, role, trangthai }) {
+    try {
+      // Kiểm tra username hoặc email đã tồn tại
+      const existingUser = await AccountModel.findOne({
+        $or: [{ TenTK }, { email }]
+      });
+      if (existingUser) {
+        throw new Error('Tên tài khoản hoặc email đã được sử dụng');
+      }
 
-            const createAccount = new AccountModel({TenTK,pass,email,role,trangthai});
-            return await createAccount.save();
-        }catch(err){
-            throw err;
-        }
+      const createAccount = new AccountModel({ TenTK, pass, email, role, trangthai });
+      return await createAccount.save();
+    } catch (err) {
+      throw err;
     }
+  }
 
-    static async loginUser({ TenTK, pass }) {
+  static async loginUser({ TenTK, pass }) {
     try {
       const user = await AccountModel.findOne({ TenTK });
       if (!user) {
@@ -50,12 +49,33 @@ class AccountService{
         }
       );
 
-    return { user, token };
+      return { user, token };
     } catch (error) {
       throw error;
     }
   }
 
+  // Lấy tất cả tài khoản
+  static async getAllAccounts() {
+    try {
+      return await AccountModel.find().select('-pass');
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  // Lấy 1 tài khoản theo ID
+  static async getAccountById(id) {
+    try {
+      const account = await AccountModel.findById(id).select('-pass');
+      if (!account) {
+        throw new Error('Không tìm thấy tài khoản');
+      }
+      return account;
+    } catch (error) {
+      throw error;
+    }
+  }
 
 
 }

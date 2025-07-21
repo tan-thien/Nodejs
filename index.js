@@ -11,6 +11,8 @@ const scheduleModel = require('./src/models/Schedule.models');
 const seatModel = require('./src/models/Seat.models');
 const ticketModel = require('./src/models/Ticket.models');
 
+require('dotenv').config();
+
 const port = 3000;
 
 app.get('/',(req,res)=>

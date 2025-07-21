@@ -8,5 +8,8 @@ router.get('/schedule/getall', ScheduleController.getAll);
 router.get('/schedule/getbyid/:id', ScheduleController.getById);
 router.put('/schedule/update/:id', authenticateToken, authorizeRole('admin'), ScheduleController.update);
 router.delete('/schedule/delete/:id', authenticateToken, authorizeRole('admin'), ScheduleController.remove);
+router.get('/schedule/by-movie/:movieId', ScheduleController.getByMovieId);
+router.get('/schedule/by-cinema/:cinemaId', ScheduleController.getByCinemaId);
+
 
 module.exports = router;

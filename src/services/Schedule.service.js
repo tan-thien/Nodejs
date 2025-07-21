@@ -1,4 +1,8 @@
 const Schedule = require('../models/Schedule.models');
+const Seat = require('../models/Seat.models');
+const ScheduleSeat = require('../models/ScheduleSeat.model');
+
+
 
 exports.create = async (data) => {
   return await Schedule.create(data);
@@ -18,4 +22,21 @@ exports.update = async (id, data) => {
 
 exports.remove = async (id) => {
   return await Schedule.findByIdAndDelete(id);
+};
+
+exports.getByMovieId = async (movieId) => {
+  return await Schedule.find({ MaPhim: movieId })
+    .populate('MaPhim')
+    .populate({
+      path: 'MaRap',
+      populate: {
+        path: 'MaChiNhanh',
+        model: 'Branch'
+      }
+    });
+};
+
+
+exports.getByCinemaId = async (cinemaId) => {
+  return await Schedule.find({ MaRap: cinemaId }).populate('MaPhim').populate('MaRap');
 };

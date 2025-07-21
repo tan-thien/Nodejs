@@ -45,3 +45,19 @@ exports.remove = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
+exports.getByMovieId = async (req, res) => {
+  try {
+    const result = await ScheduleService.getByMovieId(req.params.movieId);
+    res.json(result);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+exports.getByCinemaId = async (req, res) => {
+  try {
+    const result = await ScheduleService.getByCinemaId(req.params.cinemaId);
+    res.json(result);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};

@@ -39,3 +39,22 @@ exports.login = async (req, res, next) => {
     res.status(401).json({ status: false, message: error.message });
   }
 };
+
+exports.getAll = async (req, res, next) => {
+  try {
+    const accounts = await AccountService.getAllAccounts();
+    res.json({ status: true, accounts });
+  } catch (error) {
+    next(error);
+  }
+};
+
+exports.getById = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const account = await AccountService.getAccountById(id);
+    res.json({ status: true, account });
+  } catch (error) {
+    res.status(404).json({ status: false, message: error.message });
+  }
+};
