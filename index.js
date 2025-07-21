@@ -10,6 +10,8 @@ const movieModel = require('./src/models/Movie.models');
 const scheduleModel = require('./src/models/Schedule.models');
 const seatModel = require('./src/models/Seat.models');
 const ticketModel = require('./src/models/Ticket.models');
+const orderModel = require('./src/models/Order.model');
+const orderdetailModel = require('./src/models/OrderDetail.model');
 
 require('dotenv').config();
 

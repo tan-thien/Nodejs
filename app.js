@@ -15,6 +15,7 @@ const servicesRoutes = require('./src/routers/Service.route');
 const paymentRouter = require('./src/routers/payment.route');
 const paypalRouter = require('./src/routers/paypal.route');
 const braintreeRoute = require('./src/routers/braintree.route');
+const order = require('./src/routers/order.routes');
 
 const app = express();
 
@@ -48,5 +49,6 @@ app.use('/',servicesRoutes);
 app.use('/', paymentRouter);
 app.use('/api/paypal', paypalRouter);
 app.use('/api/braintree', braintreeRoute);
+app.use('/', order);
 
 module.exports = app;
