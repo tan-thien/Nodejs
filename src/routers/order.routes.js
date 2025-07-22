@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const OrderController = require('../controllers/Order.controller');
+const OrderController = require('../controllers/order.controller');
 const authenticateToken = require('../middlewares/authenticateToken');
 
 // Đặt hàng mới
